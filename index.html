@@ -93,9 +93,30 @@
       <div class="section-head"><div class="kicker">Kontak</div><h2>Mulai percakapan.</h2><p>Isi formulir untuk menyiapkan pesan kebutuhan proyek. Ganti detail kontak di file ini dengan kontak resmi Djasa sebelum website dipublikasikan.</p></div>
       <div class="contact-grid">
         <div class="contact-info">
-          <div class="contact-item"><div class="iconbox" style="margin:0;flex:0 0 45px">✉</div><div><strong>Email</strong><small>Tambahkan email bisnis Djasa</small></div></div>
-          <div class="contact-item"><div class="iconbox" style="margin:0;flex:0 0 45px">◉</div><div><strong>WhatsApp</strong><small>Tambahkan nomor WhatsApp bisnis</small></div></div>
-          <div class="contact-item"><div class="iconbox" style="margin:0;flex:0 0 45px">◎</div><div><strong>Media sosial</strong><small>Tambahkan akun resmi Djasa</small></div></div>
+          
+<a class="contact-item"
+   href="https://wa.me/6281234567890"
+   target="_blank"
+   rel="noopener noreferrer">
+  <div class="iconbox" style="margin:0;flex:0 0 45px">◉</div>
+  <div>
+    <strong>WhatsApp</strong>
+    <small>Chat langsung dengan Djasa</small>
+  </div>
+</a>
+
+          
+<a class="contact-item"
+   href="https://www.tiktok.com/@usernamekamu"
+   target="_blank"
+   rel="noopener noreferrer">
+  <div class="iconbox" style="margin:0;flex:0 0 45px">◎</div>
+  <div>
+    <strong>TikTok</strong>
+    <small>Lihat konten Djasa</small>
+  </div>
+</a>
+
         </div>
         <div class="contact-card">
           <form class="form" id="contactForm">
@@ -117,15 +138,26 @@
   menuBtn.addEventListener('click',()=>{const open=navlinks.classList.toggle('open');menuBtn.setAttribute('aria-expanded',String(open));menuBtn.textContent=open?'✕':'☰';});
   navlinks.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{navlinks.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');menuBtn.textContent='☰';}));
   document.getElementById('year').textContent=new Date().getFullYear();
-  document.getElementById('contactForm').addEventListener('submit',event=>{
-    event.preventDefault();
-    const data=new FormData(event.currentTarget);
-    const email=''; // Ganti dengan email resmi Djasa, contoh: halo@djasa.id
-    const subject=encodeURIComponent('Permintaan layanan Djasa — '+data.get('service'));
-    const body=encodeURIComponent('Nama: '+data.get('name')+'\nBisnis: '+(data.get('business')||'-')+'\nLayanan: '+data.get('service')+'\n\nKebutuhan:\n'+data.get('message'));
-    if(!email){document.getElementById('formNote').textContent='Form sudah siap. Untuk mengirim pesan, tambahkan email resmi Djasa pada kode (variabel email di bagian JavaScript), lalu coba lagi.';return;}
-    window.location.href='mailto:'+email+'?subject='+subject+'&body='+body;
-  });
+  
+document.getElementById('contactForm').addEventListener('submit', event => {
+  event.preventDefault();
+
+  const data = new FormData(event.currentTarget);
+  const nomorWA = '082119801947';
+
+  const pesan =
+    'Halo Djasa, saya ingin memesan layanan.\n\n' +
+    'Nama: ' + data.get('name') + '\n' +
+    'Bisnis: ' + (data.get('business') || '-') + '\n' +
+    'Layanan: ' + data.get('service') + '\n\n' +
+    'Kebutuhan:\n' + data.get('message');
+
+  const url = 'https://wa.me/' + nomorWA +
+    '?text=' + encodeURIComponent(pesan);
+
+  window.location.href = url;
+});
+
 </script>
 </body>
 </html>
